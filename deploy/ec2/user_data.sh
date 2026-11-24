@@ -10,7 +10,7 @@
 set -euxo pipefail
 exec > >(tee /var/log/ecoraee-user-data.log) 2>&1
 
-REPO_URL="https://github.com/USUARIO/ecoraee-cloud.git"   # <-- cambiar
+REPO_URL="https://github.com/grcrismogit/EcoRaeee-Cloud.git"
 RAMA="main"
 
 # 1) Docker (ejecuta la API), git y el cliente de PostgreSQL 16 (migración a RDS)

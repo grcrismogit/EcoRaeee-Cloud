@@ -4,7 +4,7 @@
 #
 #  Se ejecuta en AWS CloudShell (ya trae AWS CLI, Node.js y npm) con el
 #  repositorio clonado, y con un usuario del grupo G-Datos:
-#    git clone https://github.com/USUARIO/ecoraee-cloud.git && cd ecoraee-cloud
+#    git clone https://github.com/grcrismogit/EcoRaeee-Cloud.git && cd EcoRaeee-Cloud
 #    bash deploy/frontend/desplegar_frontend.sh <bucket-frontend> http://<IP-elástica-de-EC2> [sin-demo]
 #    bash deploy/frontend/desplegar_frontend.sh <bucket-frontend> cloudfront [sin-demo]
 #
