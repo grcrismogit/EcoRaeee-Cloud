@@ -1,0 +1,8 @@
+ECORAEE CLOUD - INFORME TÉCNICO (DATOS SINTÉTICOS)
+Dispositivo: RAEE-2026-00005 · Impresora Epson L3150
+Técnico evaluador: Sofía Herrera (ReTech Reacondicionamiento S.A.)
+Fecha: 2026-10-09
+Condición: INSERVIBLE
+Clasificación: NO_RECUPERABLE
+Hallazgos: cabezal de impresión y tarjeta lógica quemados; tanques con residuos de tinta.
+Recomendación: enviar a gestor autorizado para disposición final.

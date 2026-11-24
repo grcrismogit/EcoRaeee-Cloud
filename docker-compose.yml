@@ -1,0 +1,64 @@
+# EcoRAEE Cloud · entorno 100 % local (sin servicios en la nube)
+#   docker compose up --build
+#   Frontend: http://localhost:5173 · API: http://localhost:8000/docs · Adminer: http://localhost:8081
+name: ecoraee-cloud
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ecoraee-db
+    environment:
+      POSTGRES_DB: ecoraee
+      POSTGRES_USER: ecoraee
+      POSTGRES_PASSWORD: ecoraee_local
+      TZ: America/Guayaquil
+      PGTZ: America/Guayaquil
+    ports:
+      - "5433:5432"          # 5433 en tu PC para no chocar con un PostgreSQL ya instalado
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d:ro   # 01 (modelo físico) y 02 (datos) se ejecutan la primera vez
+      - pgdata:/var/lib/postgresql/data             # persistencia de la información
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecoraee -d ecoraee"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    container_name: ecoraee-api
+    environment:
+      DATABASE_URL: postgresql+psycopg://ecoraee:ecoraee_local@db:5432/ecoraee
+      JWT_SECRET: cambia-esta-clave-en-produccion-ecoraee-2026
+      CORS_ORIGINS: http://localhost:5173
+      STORAGE_DIR: /app/storage
+      TZ: America/Guayaquil
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/storage:/app/storage   # evidencias (simulación local de S3)
+      - ./database:/database:ro          # para reiniciar la base: docker compose exec api python -m scripts.init_db
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    container_name: ecoraee-web
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+  adminer:
+    image: adminer:4.8.1
+    container_name: ecoraee-adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

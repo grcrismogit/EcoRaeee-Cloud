@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SoloLosBucketsDelProyecto",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::ecoraee-frontend-*",
+        "arn:aws:s3:::ecoraee-frontend-*/*",
+        "arn:aws:s3:::ecoraee-evidencias-*",
+        "arn:aws:s3:::ecoraee-evidencias-*/*"
+      ]
+    },
+    {
+      "Sid": "VerListaDeBuckets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketLocation",
+        "s3:GetAccountPublicAccessBlock"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

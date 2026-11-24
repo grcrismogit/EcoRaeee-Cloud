@@ -1,0 +1,56 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ParametrosDeLaApp",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:PutParameter",
+        "ssm:GetParameter",
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath",
+        "ssm:DeleteParameter",
+        "ssm:AddTagsToResource",
+        "ssm:ListTagsForResource"
+      ],
+      "Resource": [
+        "arn:aws:ssm:us-east-1:CUENTA:parameter/ecoraee",
+        "arn:aws:ssm:us-east-1:CUENTA:parameter/ecoraee/*"
+      ]
+    },
+    {
+      "Sid": "VerParametros",
+      "Effect": "Allow",
+      "Action": "ssm:DescribeParameters",
+      "Resource": "*"
+    },
+    {
+      "Sid": "TopicoDeEventos",
+      "Effect": "Allow",
+      "Action": "sns:*",
+      "Resource": "arn:aws:sns:us-east-1:CUENTA:ecoraee-eventos"
+    },
+    {
+      "Sid": "VerTopicos",
+      "Effect": "Allow",
+      "Action": [
+        "sns:ListTopics",
+        "sns:ListSubscriptions"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "EntrarALaInstanciaSinSSH",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:StartSession",
+        "ssm:TerminateSession",
+        "ssm:ResumeSession",
+        "ssm:DescribeSessions",
+        "ssm:GetConnectionStatus",
+        "ssm:DescribeInstanceInformation"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
